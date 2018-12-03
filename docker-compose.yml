@@ -9,7 +9,12 @@ services:
     volumes:
       - ".:/usr/src/app"
       - "/usr/src/app/node_modules"
+    command: sh -c "yarn --production=false && yarn clean && yarn deploy --project "$FB_PROJECTID""
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=development
+      - FB_PROJECTID=<FIREBASE PROJECT>
+      - FIREBASE_TOKEN=<FIREBASE KEY>
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/dist/functions/serviceAccountKey.json
+      - POSTMARK_PLUGIN_TESTING: POSTMARK_PLUGIN_TESTING
