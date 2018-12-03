@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import firebase from './firebase.js';
 
 class App extends Component {
   constructor() {
@@ -11,6 +11,7 @@ class App extends Component {
       removalCode: ''
     }
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -18,6 +19,21 @@ class App extends Component {
       [e.target.name]: e.target.value
     });
   }
+  
+  handleSubmit(e) {
+  e.preventDefault();
+  const itemsRef = firebase.database().ref('items');
+  const item = {
+    posterEmail: this.state.posterEmail,
+    foundItem: this.state.foundItem,
+    removalCode: this.state.removalCode
+  }
+  itemsRef.push(item);
+  this.setState({
+    currentItem: '',
+    username: ''
+  });
+}
  
   render() {
     
@@ -31,7 +47,7 @@ class App extends Component {
         </header>
         <div className='container'>
           <section className='add-item'>
-              <form>
+              <form onSubmit={this.handleSubmit}>
                 <input type="text" name="posterEmail" placeholder="What's your Email?" onChange={this.handleChange} value={this.state.posterEmail} />
                 <input type="text" name="foundItem" placeholder="What did you find?" onChange={this.handleChange} value={this.state.foundItem} />
                 <input type="text" name="removalCode" placeholder="Choose a code for deletion" onChange={this.handleChange} value={this.state.removalCode} />
