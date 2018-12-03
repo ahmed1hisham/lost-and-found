@@ -8,7 +8,8 @@ class App extends Component {
     this.state = {
       posterEmail: '',
       foundItem: '',
-      removalCode: ''
+      removalCode: '',
+      items: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,6 +33,25 @@ class App extends Component {
   this.setState({
     currentItem: '',
     username: ''
+  });
+}
+
+componentDidMount() { // to fetch items from DB
+  const itemsRef = firebase.database().ref('items');
+  itemsRef.on('value', (snapshot) => {
+    let items = snapshot.val();
+    let newState = [];
+    for (let item in items) {
+      newState.push({
+        id: item,
+        posterEmail: items[item].posterEmail,
+        foundItem: items[item].foundItem,
+        removalCode: items[item].removalCode
+      });
+    }
+    this.setState({
+      items: newState
+    });
   });
 }
  
