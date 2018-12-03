@@ -4,6 +4,7 @@ import AddItemComponent from "./components/addItemComponent";
 import { getItems } from "./services/fakeItemsService";
 import ImageUploader from "react-images-upload";
 import Postmark from "postmark";
+import axios from "axios";
 
 class App extends Component {
   state = {
@@ -32,38 +33,55 @@ class App extends Component {
       tempImage: this.state.tempImage.concat(picture)
     });
   };
-  sendEmail() {
-    var postmark = require("postmark");
-    var client = new postmark.Client("7db32b81-b27d-458d-8703-a9fa2a7147f7");
-    client.sendEmail({
+  async sendEmail() {
+    // var postmark = require("postmark");
+    // var client = new postmark.Client("7db32b81-b27d-458d-8703-a9fa2a7147f7");
+    // client.sendEmail({
+    //   From: "salma.alzoghby@student.guc.edu.eg",
+    //   To: "ahmed.rihan@student.guc.edu.eg",
+    //   Subject: "Test",
+    //   TextBody: "Hello from Postmark!"
+    // });
+
+    const promise = await axios.post('https://api.postmarkapp.com/email',
+    {
       From: "salma.alzoghby@student.guc.edu.eg",
       To: "ahmed.rihan@student.guc.edu.eg",
       Subject: "Test",
       TextBody: "Hello from Postmark!"
+    },
+    {
+      headers: {
+      "Accept": "application/json",
+      "X-Postmark-Server-Token": "7db32b81-b27d-458d-8703-a9fa2a7147f7",
+      "Access-Control-Allow-Origin": "*"
+
+    }
     });
+    console.log(promise);
   }
 
-  sendEmailCurl() {
-    const curl = new (require("curl-request"))();
-    curl.setHeaders([
-      '"Accept": "application/json"',
-      '"X-Postmark-Server-Token": "7db32b81-b27d-458d-8703-a9fa2a7147f7"'
-    ]);
-    curl
-      .setBody({
-        From: "salma.alzoghby@student.guc.edu.eg",
-        To: "ahmed.rihan@student.guc.edu.eg",
-        Subject: "Test",
-        TextBody: "Hello from Postmark!"
-      })
-      .post("https://api.postmarkapp.com/email")
-      .then(({ statusCode, body, headers }) => {
-        console.log(statusCode, body, headers);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
+  // sendEmailCurl() {
+  //   const curl = new (require("curl-request"))();
+  //   curl.setHeaders([
+  //     '"Accept": "application/json"',
+  //     '"X-Postmark-Server-Token": "7db32b81-b27d-458d-8703-a9fa2a7147f7"'
+  //   ]);
+  //   curl
+  //     .setBody({
+  //       From: "salma.alzoghby@student.guc.edu.eg",
+  //       To: "ahmed.rihan@student.guc.edu.eg",
+  //       Subject: "Test",
+  //       TextBody: "Hello from Postmark!"
+  //     })
+  //     .post("https://api.postmarkapp.com/email")
+  //     .then(({ statusCode, body, headers }) => {
+  //       console.log(statusCode, body, headers);
+  //     })
+  //     .catch(e => {
+  //       console.log(e);
+  //     });
+  // }
 
   render() {
     return (
@@ -172,7 +190,7 @@ class App extends Component {
                     </h5>
                     <a
                       href="#"
-                      onClick={this.sendEmailCurl}
+                      onClick={this.sendEmail}
                       className="btn btn-primary"
                       style={{ width: "100%" }}
                     >
