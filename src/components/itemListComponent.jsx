@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class AddItemComponent extends Component {
+class ItemListComponent extends Component {
   state = {};
 
   render() {
@@ -8,4 +8,4 @@ class AddItemComponent extends Component {
   }
 }
 
-export default AddItemComponent;
+export default ItemListComponent;
