@@ -42,3 +42,45 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+
+
+## Build your image and tag it with a name:
+
+
+docker build -t my-react-app .
+
+
+## Test your image with:
+
+
+docker run -p 80:80 my-react-app
+
+
+## Open your browser in http://localhost.
+
+## docker-compose
+
+## Build the image and fire up the container:
+
+$ docker-compose up -d --build
+
+## to Bring down the container before moving on:
+
+$ docker-compose stop
+
+## dependencies
+
+    "axios": "^0.18.0",
+    "bootstrap": "^4.1.3",
+    "postmark": "^2.2.0",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-images-upload": "^1.2.3",
+    "react-responsive-modal": "^3.5.1",
+    "react-scripts": "2.1.1",
+    "sendmail": "^1.4.1"
+    
+ ## config
+     "extends": "react-app"
