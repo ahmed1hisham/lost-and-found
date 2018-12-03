@@ -55,7 +55,7 @@ docker build -t my-react-app .
 ## Test your image with:
 
 
-docker run -p 80:80 my-react-app
+sudo docker run -p 3000:3000 lost-and-found
 
 
 ## Open your browser in http://localhost.
