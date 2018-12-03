@@ -34,14 +34,37 @@ class App extends Component {
   };
   sendEmail() {
     var postmark = require("postmark");
-    var client = new postmark.Client("d15218b9-7bbc-4ec8-93ed-1d71b58a837d");
+    var client = new postmark.Client("7db32b81-b27d-458d-8703-a9fa2a7147f7");
     client.sendEmail({
-      From: "noreply@ifound.com",
-      To: "ahmed11rihan@gmail.com",
+      From: "salma.alzoghby@student.guc.edu.eg",
+      To: "ahmed.rihan@student.guc.edu.eg",
       Subject: "Test",
       TextBody: "Hello from Postmark!"
     });
   }
+
+  sendEmailCurl() {
+    const curl = new (require("curl-request"))();
+    curl.setHeaders([
+      '"Accept": "application/json"',
+      '"X-Postmark-Server-Token": "7db32b81-b27d-458d-8703-a9fa2a7147f7"'
+    ]);
+    curl
+      .setBody({
+        From: "salma.alzoghby@student.guc.edu.eg",
+        To: "ahmed.rihan@student.guc.edu.eg",
+        Subject: "Test",
+        TextBody: "Hello from Postmark!"
+      })
+      .post("https://api.postmarkapp.com/email")
+      .then(({ statusCode, body, headers }) => {
+        console.log(statusCode, body, headers);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -149,7 +172,7 @@ class App extends Component {
                     </h5>
                     <a
                       href="#"
-                      onClick={this.sendEmail}
+                      onClick={this.sendEmailCurl}
                       className="btn btn-primary"
                       style={{ width: "100%" }}
                     >
