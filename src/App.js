@@ -9,6 +9,7 @@ class App extends Component {
       posterEmail: '',
       foundItem: '',
       removalCode: '',
+      foundIn:'',
       items: []
     }
     this.handleChange = this.handleChange.bind(this);
@@ -27,12 +28,15 @@ class App extends Component {
   const item = {
     posterEmail: this.state.posterEmail,
     foundItem: this.state.foundItem,
-    removalCode: this.state.removalCode
+    removalCode: this.state.removalCode,
+    foundIn: this.state.foundIn
   }
   itemsRef.push(item);
   this.setState({
-    currentItem: '',
-    username: ''
+    posterEmail: '',
+    foundItem: '',
+    removalCode: '',
+    foundIn:''
   });
 }
 
@@ -46,7 +50,8 @@ componentDidMount() { // to fetch items from DB
         id: item,
         posterEmail: items[item].posterEmail,
         foundItem: items[item].foundItem,
-        removalCode: items[item].removalCode
+        removalCode: items[item].removalCode,
+        foundIn: items[item].foundIn
       });
     }
     this.setState({
@@ -70,28 +75,26 @@ componentDidMount() { // to fetch items from DB
               <form onSubmit={this.handleSubmit}>
                 <input type="text" name="posterEmail" placeholder="What's your Email?" onChange={this.handleChange} value={this.state.posterEmail} />
                 <input type="text" name="foundItem" placeholder="What did you find?" onChange={this.handleChange} value={this.state.foundItem} />
+                <input type="text" name="foundIn" placeholder="Where did you find it?" onChange={this.handleChange} value={this.state.foundIn} />
                 <input type="text" name="removalCode" placeholder="Choose a code for deletion" onChange={this.handleChange} value={this.state.removalCode} />
+
                 <button>Add Item</button>
               </form>
           </section>
-         <section className='display-item'>
+          <section className='display-item'>
   <div className="wrapper">
     <ul>
       {this.state.items.map((item) => {
         return (
           <li key={item.id}>
-            <h3>{item.title}</h3>
-            <p>brought by: {item.user}</p>
+            <h3>{item.foundItem}</h3>
+            <p>Found in: {item.foundIn}</p>
           </li>
         )
       })}
     </ul>
   </div>
 </section>
-              <ul>
-              </ul>
-            </div>
-          </section>
         </div>
       </div>
     );
