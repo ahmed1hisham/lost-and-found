@@ -94,6 +94,7 @@ componentDidMount() { // to fetch items from DB
           <li key={item.id}>
             <h3>{item.foundItem}</h3>
             <p>Found in: {item.foundIn}</p>
+            <button onClick={() => this.claimMine(item.id)}>This is mine!!</button>
           </li>
         )
       })}
