@@ -43,10 +43,21 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-Build your image and tag it with a name:
-docker build -t my-react-app .
-Test your image with:
-docker run -p 80:80 my-react-app
-Open your browser in http://localhost.
 
-If you are using testing and want to integrate it, read the last section.
+
+
+## Build your image and tag it with a name:
+
+
+docker build -t my-react-app .
+
+
+## Test your image with:
+
+
+docker run -p 80:80 my-react-app
+
+
+## Open your browser in http://localhost.
+
+
