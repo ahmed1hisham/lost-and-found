@@ -59,6 +59,11 @@ componentDidMount() { // to fetch items from DB
     });
   });
 }
+  
+  claimMine(itemId) {
+  const itemRef = firebase.database().ref(`/items/${itemId}`);
+  itemRef.remove();
+}
  
   render() {
     
