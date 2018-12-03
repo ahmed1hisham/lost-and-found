@@ -62,13 +62,19 @@ sudo docker run -p 3000:3000 lost-and-found
 
 ## docker-compose
 
+## to run 
+
+
+
 ## Build the image and fire up the container:
 
-$ docker-compose up -d --build
+$ sudo apt install docker-compose
+
+$ sudo docker-compose up -d --build
 
 ## to Bring down the container before moving on:
 
-$ docker-compose stop
+$ sudo docker-compose stop
 
 ## dependencies
 
